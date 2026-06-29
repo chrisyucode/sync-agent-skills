@@ -2,7 +2,8 @@
 
 Keep your user-authored **global skills** in one place and share them across
 multiple agent CLIs — [Claude Code](https://docs.claude.com/en/docs/claude-code),
-[Codex](https://github.com/openai/codex), and [Cursor](https://cursor.com).
+[Codex](https://github.com/openai/codex), [Cursor](https://cursor.com), and
+[opencode](https://opencode.ai).
 
 Author a skill once in any agent; it becomes available in all of them via a
 shared directory and symlinks. No copying, no drift.
@@ -23,9 +24,10 @@ real skill folders. Each agent's skills directory gets **symlinks** back into it
   merge-ai-texts/
   ...
 
-~/.claude/skills/sync-agent-skills -> ~/skills/sync-agent-skills
-~/.cursor/skills/sync-agent-skills -> ~/skills/sync-agent-skills
-~/.codex/skills/sync-agent-skills  -> ~/skills/sync-agent-skills
+~/.claude/skills/sync-agent-skills          -> ~/skills/sync-agent-skills
+~/.cursor/skills/sync-agent-skills          -> ~/skills/sync-agent-skills
+~/.codex/skills/sync-agent-skills           -> ~/skills/sync-agent-skills
+~/.config/opencode/skills/sync-agent-skills -> ~/skills/sync-agent-skills
 ```
 
 ## Setup (one-time, by hand)
@@ -61,6 +63,7 @@ flowchart LR
         C["~/.claude/skills"]
         U["~/.cursor/skills"]
         X["~/.codex/skills"]
+        O["~/.config/opencode/skills"]
     end
 
     SH["<b>~/skills</b><br/>single source of truth<br/>new-skill/ · another-skill/ · …"]

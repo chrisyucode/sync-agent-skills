@@ -1,6 +1,6 @@
 ---
 name: sync-agent-skills
-description: Use right after you create, rename, move, or delete a skill in any agent's skills directory (~/.claude/skills, ~/.cursor/skills, ~/.codex/skills), or when a skill authored under one agent is missing from the others, or when those skills directories contain broken or wrong symlinks. Propagates a skill made in one agent (Claude Code, Codex, Cursor) to all of them.
+description: Use right after you create, rename, move, or delete a skill in any agent's skills directory (~/.claude/skills, ~/.cursor/skills, ~/.codex/skills, ~/.config/opencode/skills), or when a skill authored under one agent is missing from the others, or when those skills directories contain broken or wrong symlinks. Propagates a skill made in one agent (Claude Code, Codex, Cursor, opencode) to all of them.
 ---
 
 # Sync Agent Skills
@@ -50,6 +50,8 @@ they ask to update the agent CLIs first.
    `SKILL.md` from an agent dir into `~/skills`, then replaces it with a symlink.
    Skips tool-bundled skills (`anthropics/`, Codex `.system/`, Cursor's separate
    `skills-cursor/`), existing symlinks (e.g. project links), and non-directories.
+   For an installed agent that has no `skills/` dir yet (e.g. opencode), the dir
+   is created so links can land in it.
 2. **relink** — symlinks every shared skill into every installed agent; fixes
    wrong targets.
 3. **prune** — removes dangling symlinks that pointed into `~/skills`.

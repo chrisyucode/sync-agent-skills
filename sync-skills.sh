@@ -21,6 +21,7 @@ TOOLS=(
   "$HOME/.claude/skills"
   "$HOME/.cursor/skills"
   "$HOME/.codex/skills"
+  "$HOME/.config/opencode/skills"
 )
 
 # Top-level names inside a tool's skills/ that are TOOL-BUNDLED — never absorb.
@@ -96,7 +97,13 @@ relink() {
     [ -d "$skill" ] || continue
     name="$(basename "$skill")"
     for tool in "${TOOLS[@]}"; do
-      [ -d "$tool" ] || continue           # tool not installed -> skip
+      if [ ! -d "$tool" ]; then
+        # agent installed (its config parent exists) but no skills/ dir yet -> create it.
+        # agent not installed (parent missing too) -> skip.
+        [ -d "$(dirname "$tool")" ] || continue
+        echo "mkdir: $tool"; run mkdir -p "$tool"
+        [ "$DRY" = 1 ] && continue          # can't link into a dir we only pretended to create
+      fi
       link="$tool/$name"
       if [ -L "$link" ]; then
         [ "$(readlink "$link")" = "$skill" ] || { echo "fix link: $link"; run ln -sfn "$skill" "$link"; }
